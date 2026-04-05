@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ΑΕΤ Apparel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── GATE SCREEN ── -->
+  <div id="gate" class="screen active">
+    <div class="gate-bg"></div>
+    <div class="gate-card">
+      <div class="crest">ΧΨ</div>
+      <h1>Alpha Epsilon Tau</h1>
+      <p class="subtitle">Brothers only. Enter your name to continue.</p>
+      <div class="input-wrap">
+        <input
+          type="text"
+          id="brother-name"
+          placeholder="First Last"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="enter-btn" onclick="authenticate()">Enter</button>
+      </div>
+      <p id="gate-error" class="error-msg hidden">Name not recognized. Try again.</p>
+    </div>
+  </div>
+
+  <!-- ── STORE SCREEN ── -->
+  <div id="store" class="screen">
+    <div class="site-header">
+      <header>
+        <div class="header-inner">
+          <img src="aet-apparel-logo.png" alt="ΑΕΤ Apparel" class="header-logo" />
+          <span id="header-name" class="header-name"></span>
+        </div>
+      </header>
+      <div class="ticker-wrap" aria-hidden="true">
+        <div class="ticker-track">
+          <span>Alpha Epsilon Tau &nbsp;·&nbsp; Est. 2023 &nbsp;·&nbsp; Brothers Only &nbsp;·&nbsp; Purdue University &nbsp;·&nbsp; ΧΨ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>Alpha Epsilon Tau &nbsp;·&nbsp; Est. 2023 &nbsp;·&nbsp; Brothers Only &nbsp;·&nbsp; Purdue University &nbsp;·&nbsp; ΧΨ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section class="hero">
+        <h2>Merch</h2>
+        <p>Current inventory available. Click "I Want This" and we'll be in touch.</p>
+      </section>
+
+      <div id="items-grid" class="items-grid">
+        <!-- Populated by JS from Supabase/Notion -->
+        <!-- Skeleton placeholders shown while loading -->
+        <div class="item-card skeleton"></div>
+        <div class="item-card skeleton"></div>
+        <div class="item-card skeleton"></div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Chi Psi · Alpha Epsilon Tau · Purdue University · Est. 2023</p>
+    </footer>
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox" class="lightbox hidden" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
+  <!-- ── ORDER MODAL ── -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h3 id="modal-title">Item Name</h3>
+      <p id="modal-desc">You're expressing interest in this item. We'll reach out to coordinate payment and pickup.</p>
+      <div class="modal-meta">
+        <span id="modal-price"></span>
+        <span id="modal-type"></span>
+      </div>
+      <div class="modal-size-row">
+        <label>Size</label>
+        <div class="size-options">
+          <button class="size-btn" data-size="S">S</button>
+          <button class="size-btn" data-size="M">M</button>
+          <button class="size-btn" data-size="L">L</button>
+          <button class="size-btn" data-size="XL">XL</button>
+          <button class="size-btn" data-size="XXL">XXL</button>
+        </div>
+      </div>
+      <button id="confirm-btn" onclick="submitOrder()">Send Interest →</button>
+      <p id="modal-status" class="modal-status hidden"></p>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script src="store.js"></script>
+  <script src="order.js"></script>
+</body>
+</html>
