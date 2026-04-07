@@ -13,10 +13,10 @@
   <!-- ── GATE SCREEN ── -->
   <div id="gate" class="screen active">
     <div class="gate-bg"></div>
-    <div class="gate-card">
-      <div class="crest">ΧΨ</div>
-      <h1>Alpha Epsilon Tau</h1>
-      <p class="subtitle">Brothers only. Enter your name to continue.</p>
+    <div class="gate-wrap">
+      <img src="aet-apparel-logo.png" alt="ΑΕΤ Apparel" class="gate-logo" />
+      <div class="gate-card">
+        <p class="subtitle">Enter your full name to continue.</p>
       <div class="input-wrap">
         <input
           type="text"
@@ -28,6 +28,7 @@
         <button id="enter-btn" onclick="authenticate()">Enter</button>
       </div>
       <p id="gate-error" class="error-msg hidden">Name not recognized. Try again.</p>
+      </div>
     </div>
   </div>
 
@@ -42,16 +43,15 @@
       </header>
       <div class="ticker-wrap" aria-hidden="true">
         <div class="ticker-track">
-          <span>Alpha Epsilon Tau &nbsp;·&nbsp; Est. 2023 &nbsp;·&nbsp; Brothers Only &nbsp;·&nbsp; Purdue University &nbsp;·&nbsp; ΧΨ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span>Alpha Epsilon Tau &nbsp;·&nbsp; Est. 2023 &nbsp;·&nbsp; Brothers Only &nbsp;·&nbsp; Purdue University &nbsp;·&nbsp; ΧΨ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>ΧΨ &nbsp;·&nbsp; Alpha Epsilon Tau &nbsp;·&nbsp; Est. 2023  </span>
         </div>
       </div>
     </div>
 
     <main>
       <section class="hero">
-        <h2>Merch</h2>
-        <p>Current inventory available. Click "I Want This" and we'll be in touch.</p>
+        <h2>Available</h2>
+        <p>Current inventory available to buy. Click "I Want This" and we'll be in touch.</p>
       </section>
 
       <div id="items-grid" class="items-grid">
@@ -79,7 +79,7 @@
     <div class="modal">
       <button class="modal-close" onclick="closeModal()">✕</button>
       <h3 id="modal-title">Item Name</h3>
-      <p id="modal-desc">You're expressing interest in this item. We'll reach out to coordinate payment and pickup.</p>
+      <p id="modal-desc">Click to express interest in this item. I'll reach out to coordinate payment and pickup.</p>
       <div class="modal-meta">
         <span id="modal-price"></span>
         <span id="modal-type"></span>

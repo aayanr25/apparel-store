@@ -1,0 +1,8 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aet-notion-worker",
+  "main": "worker.js",
+  "compatibility_date": "2026-04-05",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true }
+}
