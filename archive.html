@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ΑΕΤ Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="archive-body">
+
+  <div class="site-header">
+    <header>
+      <div class="header-inner">
+        <img src="aet-apparel-logo-gold.png" alt="ΑΕΤ Apparel" class="header-logo" />
+        <div class="header-nav">
+          <a href="index.html" class="nav-btn">Store</a>
+          <a href="archive.html" class="nav-btn nav-btn-active">Archive</a>
+        </div>
+        <span id="header-name" class="header-name"></span>
+      </div>
+    </header>
+    <div class="ticker-wrap ticker-wrap-gold" aria-hidden="true">
+      <div class="ticker-track">
+        <span>ΧΨ &nbsp;·&nbsp; Alpha Epsilon Tau &nbsp;·&nbsp; Est. 2023</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="archive-main">
+    <section class="hero">
+      <h2>Archive</h2>
+      <p>Every piece we've ever made, from the beginning.</p>
+    </section>
+
+    <div id="archive-wall"></div>
+  </main>
+
+  <footer>
+    <p>Chi Psi · Alpha Epsilon Tau · Purdue University · Est. 2023</p>
+  </footer>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox" class="lightbox hidden" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
+  <script src="config.js"></script>
+  <script src="archive.js"></script>
+</body>
+</html>

@@ -142,16 +142,25 @@ header {
 }
 
 .header-inner {
+  position: relative;
   padding: 10px 32px 10px 24px;
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
 .header-logo {
   height: 44px;
   width: auto;
   display: block;
+  flex-shrink: 0;
+}
+
+.header-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
 }
 
 .header-name {
@@ -159,6 +168,29 @@ header {
   font-size: 0.72rem;
   color: var(--muted);
   letter-spacing: 0.05em;
+}
+
+/* ── NAV BUTTONS (inline in header-inner) ─────────── */
+.nav-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 5px 13px;
+  border-radius: 20px;
+  border: 1.5px solid var(--purple);
+  color: var(--purple);
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+.nav-btn:hover {
+  background: var(--purple);
+  color: #fff;
+}
+.nav-btn.nav-btn-active {
+  background: var(--purple);
+  color: #fff;
 }
 
 /* ── TICKER ──────────────────────────────────────── */
@@ -592,4 +624,188 @@ footer {
   .gate-card { padding: 40px 28px 36px; }
   .items-grid { grid-template-columns: 1fr; }
   .modal { padding: 36px 24px 28px; }
+}
+
+/* ── ARCHIVE PAGE ─────────────────────────────────── */
+.archive-body {
+  background: #1a1520;
+  color: var(--cream);
+}
+
+.archive-body header {
+  background: #1a1520;
+  border-bottom: 1px solid rgba(207,161,81,0.2);
+}
+
+.archive-body .nav-btn {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: transparent;
+}
+.archive-body .nav-btn:hover {
+  background: var(--gold);
+  color: #1a1520;
+}
+.archive-body .nav-btn.nav-btn-active {
+  background: var(--gold);
+  color: #1a1520;
+  border-color: var(--gold);
+}
+
+.archive-body .header-name { color: rgba(207,161,81,0.6); }
+
+.archive-body .ticker-wrap-gold {
+  background: var(--gold);
+  border-bottom: 1px solid rgba(207,161,81,0.3);
+}
+.archive-body .ticker-wrap-gold .ticker-track span {
+  color: #1a1520;
+}
+
+.archive-body footer {
+  border-top-color: rgba(255,255,255,0.08);
+  color: rgba(250,247,242,0.3);
+}
+
+.archive-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 40px 100px;
+}
+
+.archive-body .hero h2 { color: var(--cream); }
+.archive-body .hero p  { color: rgba(250,247,242,0.45); }
+
+/* ── SEMESTER SECTIONS ────────────────────────────── */
+.semester-section {
+  margin-bottom: 72px;
+}
+
+.semester-tape {
+  display: inline-block;
+  background: var(--cream);
+  color: var(--purple);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  padding: 4px 14px;
+  margin-bottom: 28px;
+  transform: rotate(-2deg);
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.3);
+  transform-origin: left center;
+}
+
+/* ── POLAROID LAYOUT ──────────────────────────────── */
+.polaroid-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px 40px;
+  padding: 16px 8px 24px;
+}
+
+.polaroid-pair {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+/* ── POLAROID CARD ────────────────────────────────── */
+.polaroid {
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  width: 160px;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+  z-index: 10;
+  position: relative;
+}
+
+.polaroid-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #f0ecf7 0%, #e8e2f5 100%);
+}
+
+.polaroid-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-photo .item-img-placeholder {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: unset;
+  font-size: 2rem;
+}
+
+/* ── POLAROID CAPTION ─────────────────────────────── */
+.polaroid-caption {
+  padding: 8px 8px 10px;
+  text-align: center;
+  background: #fff;
+}
+
+.polaroid-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.polaroid-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: #aaa;
+}
+
+.polaroid-designer {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--gold);
+  margin-top: 2px;
+}
+
+/* ── ARCHIVE SKELETON ─────────────────────────────── */
+.archive-skeleton-wrap {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 40px 0;
+}
+
+.archive-skeleton {
+  width: 160px;
+  height: 200px;
+  background: linear-gradient(90deg, #2a1c57 25%, #3f2b7e 50%, #2a1c57 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+/* ── ARCHIVE RESPONSIVE ───────────────────────────── */
+@media (max-width: 900px) {
+  .archive-main { padding: 40px 24px 80px; }
+  .polaroid { width: 140px; }
+}
+
+@media (max-width: 600px) {
+  .archive-main { padding: 28px 16px 64px; }
+  .polaroid-row { gap: 24px 20px; }
+  .polaroid { width: 120px; }
+  .polaroid-name { font-size: 0.72rem; }
 }
