@@ -95,6 +95,11 @@ async function loadArchive() {
         pairsRow.appendChild(pair);
       });
 
+      const swipeHint = document.createElement('div');
+      swipeHint.className = 'swipe-hint';
+      swipeHint.textContent = 'swipe →';
+      pairsRow.appendChild(swipeHint);
+
       section.appendChild(pairsRow);
       wall.appendChild(section);
     });

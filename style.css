@@ -803,9 +803,124 @@ footer {
   .polaroid { width: 140px; }
 }
 
-@media (max-width: 600px) {
-  .archive-main { padding: 28px 16px 64px; }
-  .polaroid-row { gap: 24px 20px; }
-  .polaroid { width: 120px; }
+/* ── SWIPE HINT (hidden on desktop) ──────────────── */
+.swipe-hint { display: none; }
+
+/* ══════════════════════════════════════════════════
+   MOBILE  —  max-width: 640px
+   Desktop layout is completely untouched above.
+   ══════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+
+  /* ── Gate ── */
+  .gate-card {
+    width: 92vw;
+    padding: 32px 24px;
+  }
+  .crest { font-size: 2.2rem; }
+  .gate-card h1 { font-size: 1.25rem; }
+
+  /* ── Header ── */
+  .header-inner {
+    padding: 10px 16px;
+    gap: 8px;
+  }
+  .header-logo { height: 34px; }
+  .nav-btn {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+    border-radius: 14px;
+  }
+  .header-name { display: none; }
+  .ticker-wrap { padding: 5px 0; }
+  .ticker-track span { font-size: 0.6rem; }
+
+  /* ── Footer ── */
+  footer {
+    font-size: 0.65rem;
+    padding: 20px 16px;
+  }
+
+  /* ── Store — hero ── */
+  .hero { margin-bottom: 32px; }
+  .hero h2 { font-size: 1.8rem; }
+  .hero p  { font-size: 0.78rem; }
+
+  /* ── Store — grid ── */
+  .items-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .item-body { padding: 16px 18px 18px; }
+  .item-name { font-size: 1.1rem; }
+  .item-btn  { padding: 13px; }
+
+  /* ── Store — modal ── */
+  .modal {
+    padding: 28px 20px 24px;
+    width: 96vw;
+  }
+  .size-options { gap: 6px; }
+  .size-btn { padding: 8px 12px; }
+
+  /* ── Archive — main padding ── */
+  .archive-main { padding: 28px 0 64px; }
+
+  /* ── Archive — semester label ── */
+  .semester-tape {
+    margin: 24px 16px 8px;
+    font-size: 0.75rem;
+    display: block;
+    transform: none;
+  }
+
+  /* ── Archive — horizontal scroll strips ── */
+  .polaroid-row {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 12px 16px 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .polaroid-row::-webkit-scrollbar { display: none; }
+
+  .polaroid-pair {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: 220px;
+  }
+
+  .polaroid {
+    transform: none !important;
+    width: 100px;
+  }
+  .polaroid:hover {
+    transform: none !important;
+  }
+
+  .polaroid-photo img {
+    aspect-ratio: 3 / 4;
+  }
+
+  .polaroid-photo .item-img-placeholder {
+    aspect-ratio: 3 / 4;
+  }
+
   .polaroid-name { font-size: 0.72rem; }
+
+  /* ── Swipe hint ── */
+  .swipe-hint {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    align-self: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    opacity: 0.35;
+    padding: 0 16px;
+  }
 }
