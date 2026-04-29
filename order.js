@@ -42,7 +42,8 @@ function openModal(item) {
   document.getElementById('confirm-btn').disabled     = false;
   document.getElementById('confirm-btn').textContent  = 'Send Interest →';
 
-  // Reset size buttons
+  // Reset size buttons and stock status
+  document.getElementById('size-stock-status').textContent = '';
   document.querySelectorAll('.size-btn').forEach(btn => {
     btn.classList.remove('selected');
     btn.onclick = () => selectSize(btn);
@@ -61,6 +62,9 @@ function selectSize(btn) {
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   selectedSize = btn.dataset.size;
+  const stockEl = document.getElementById('size-stock-status');
+  const qty = currentItem?.sizes?.[selectedSize];
+  stockEl.textContent = qty === 0 ? 'This size is out of stock.' : '';
 }
 
 async function submitOrder() {

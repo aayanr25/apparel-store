@@ -568,6 +568,15 @@ main {
   transition: all 0.15s;
 }
 .size-btn:hover { border-color: var(--purple); color: var(--purple); }
+.size-stock-status {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.74rem;
+  color: #c0392b;
+  letter-spacing: 0.03em;
+  margin-top: 6px;
+  margin-bottom: -10px;
+  min-height: 1rem;
+}
 .size-btn.selected {
   background: var(--purple);
   border-color: var(--purple);

@@ -51,6 +51,13 @@ export default {
           price:      p.price?.number ?? null,
           quantity_available: p.quantity_available?.number ?? 0,
           semester_created:   p.semester_created?.rich_text?.[0]?.plain_text ?? '',
+          sizes: {
+            S:   p.small?.number ?? null,
+            M:   p.medium?.number ?? null,
+            L:   p.large?.number ?? null,
+            XL:  p.extra_large?.number ?? null,
+            XXL: p['2_exlarge']?.number ?? null,
+          },
           front_url: hasFile(p.front) ? `/api/image?pageId=${page.id}&field=front` : null,
           back_url:  hasFile(p.back)  ? `/api/image?pageId=${page.id}&field=back`  : null,
         };
