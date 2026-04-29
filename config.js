@@ -29,6 +29,6 @@ const CONFIG = {
   // Set to '' if you've added the custom route in wrangler.toml so that
   // the site and worker share the same origin (/api/* routes work directly).
   // Leave as '' to use demo data locally.
-  WORKER_URL: 'https://aet-notion-worker.aayanr.workers.dev'
+  WORKER_URL: 'https://aet-notion-worker.secretary-purduechipsi.workers.dev'
 
 };

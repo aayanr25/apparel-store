@@ -1,4 +1,0 @@
-name = "aet-notion-worker"
-main = "worker.js"
-compatibility_date = "2024-09-23"
-account_id = "e4762e41a08e13ea62377174623388a5"
