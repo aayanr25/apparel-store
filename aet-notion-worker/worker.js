@@ -31,12 +31,7 @@ export default {
             'Notion-Version': NOTION_VERSION,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            filter: {
-              property: 'quantity_available',
-              number: { greater_than: 0 },
-            },
-          }),
+          body: JSON.stringify({}),
         }
       );
       const data = await res.json();
@@ -49,7 +44,7 @@ export default {
           item_name: p.item_name?.title?.[0]?.plain_text ?? '',
           type:       p.type?.select?.name ?? '',
           price:      p.price?.number ?? null,
-          quantity_available: p.quantity_available?.number ?? 0,
+          quantity_available: p.quantity_available?.formula?.number ?? 0,
           semester_created:   p.semester_created?.rich_text?.[0]?.plain_text ?? '',
           sizes: {
             S:   p.small?.number ?? null,
@@ -63,7 +58,9 @@ export default {
         };
       });
 
-      const response = new Response(JSON.stringify(items), {
+      const filteredItems = items.filter(item => item.quantity_available > 0);
+
+      const response = new Response(JSON.stringify(filteredItems), {
         headers: {
           ...cors,
           'Content-Type': 'application/json',
@@ -129,7 +126,7 @@ export default {
             item_name:             p.item_name?.title?.[0]?.plain_text ?? '',
             type:                  p.type?.select?.name ?? '',
             price:                 p.price?.number ?? null,
-            quantity_available:    p.quantity_available?.number ?? 0,
+            quantity_available:    p.quantity_available?.formula?.number ?? 0,
             semester_created:      semesterText,
             semester_created_date: semesterDate,
             designer,
