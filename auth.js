@@ -1,5 +1,5 @@
 // ── AUTH ────────────────────────────────────────────
-// Checks entered name against the Supabase brothers table.
+// Checks entered name against brothers.json (project root).
 // On success, stores the name in sessionStorage and shows the store.
 
 let AUTHENTICATED_BROTHER = null;
@@ -17,34 +17,37 @@ async function authenticate() {
   errorEl.classList.add('hidden');
 
   try {
-    // Query Supabase REST API directly (no SDK needed)
-const first = raw.split(' ')[0];
-const last  = raw.split(' ').slice(1).join(' ');
+    const res = await fetch('./brothers.json');
+    const brothers = await res.json();
 
-const url = `${CONFIG.SUPABASE_URL}/rest/v1/${CONFIG.BROTHERS_TABLE}`
-  + `?select=${CONFIG.BROTHERS_FIRST},${CONFIG.BROTHERS_LAST}`
-  + `&${CONFIG.BROTHERS_FIRST}=ilike.${encodeURIComponent(first)}`
-  + `&${CONFIG.BROTHERS_LAST}=ilike.${encodeURIComponent(last)}`
-  + `&limit=1`;
+    const entered = raw.toLowerCase();
 
-    const res = await fetch(url, {
-      headers: {
-        'apikey': CONFIG.SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
-      },
+    const match = brothers.find(b => {
+      // Match: "First Last" (legal name)
+      const fullName = `${b.first} ${b.last}`.toLowerCase();
+      if (entered === fullName) return true;
+
+      // Match: preferred name if present
+      if (b.preferred) {
+        const preferred = b.preferred.toLowerCase();
+        if (entered === preferred) return true;
+
+        // Match preferred first name + legal last name
+        const prefFirst = preferred.split(' ')[0];
+        const prefAndLegalLast = `${prefFirst} ${b.last}`.toLowerCase();
+        if (entered === prefAndLegalLast) return true;
+      }
+
+      return false;
     });
 
-    if (!res.ok) throw new Error('Supabase error: ' + res.status);
-
-    const data = await res.json();
-
-  if (data.length > 0) {
-  const row = data[0];
-  AUTHENTICATED_BROTHER = `${row[CONFIG.BROTHERS_FIRST]} ${row[CONFIG.BROTHERS_LAST]}`;
-  sessionStorage.setItem('aet_brother', AUTHENTICATED_BROTHER);
-  showStore();
-  } else {
-      // ❌ Not found
+    if (match) {
+      // Use preferred name for display if available, else legal first + last
+      const displayName = match.preferred || `${match.first} ${match.last}`;
+      AUTHENTICATED_BROTHER = displayName;
+      sessionStorage.setItem('aet_brother', displayName);
+      showStore();
+    } else {
       errorEl.classList.remove('hidden');
       input.value = '';
       input.focus();

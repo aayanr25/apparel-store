@@ -2,16 +2,6 @@
 // Fill these in before deploying.
 
 const CONFIG = {
-  // Supabase
-  SUPABASE_URL:  'https://lefflqwkmledhfrsynxf.supabase.co',
-  SUPABASE_ANON_KEY: 'sb_publishable_DTjSGcF3P5Ve_kPtFyJcWA_NT8B0_DY',
-
-  // The table + column in Supabase that holds brother names.
-  // e.g. table "brothers", column "full_name"
-  BROTHERS_TABLE:  'brothers',   // keep this as whatever your table is named
-  BROTHERS_FIRST:  'first_name', // ← replace with your actual column name
-  BROTHERS_LAST:   'last_name',  // ← replace with your actual column name
-
   // Email that purchase interest notifications go to
   NOTIFY_EMAIL: 'secretary.purduechipsi@gmail.com',
 
