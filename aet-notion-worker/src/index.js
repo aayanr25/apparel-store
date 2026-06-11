@@ -1,5 +1,6 @@
 const NOTION_DB_ID = '3370d15555b580f889c8c1c98b827a93';
 const NOTION_VERSION = '2022-06-28';
+const ROSTER_SHEET_ID = '1XHAsME5GMGJ31MM0Uo77hFWdXBSB9E1_YDywiFGzNtI';
 
 export default {
   async fetch(request, env) {
@@ -159,6 +160,50 @@ export default {
       }
     }
 
+    // ── GET /api/members ─────────────────────────────
+    if (url.pathname === '/api/members') {
+      try {
+        const cacheKey = new Request('https://cache/members', request);
+        const cache = caches.default;
+        const cachedRes = await cache.match(cacheKey);
+        if (cachedRes) return cachedRes;
+
+        const sheetRes = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/${ROSTER_SHEET_ID}/values/Roster?key=${env.GOOGLE_DRIVE_API_KEY}`
+        );
+        const data = await sheetRes.json();
+
+        if (!sheetRes.ok || !Array.isArray(data.values)) {
+          return new Response(JSON.stringify({ error: 'Failed to load roster' }),
+            { status: 500, headers: { ...cors, 'Content-Type': 'application/json' } });
+        }
+
+        // Skip row 0 (header)
+        const members = data.values.slice(1).reduce((acc, row) => {
+          const first    = row[0]?.trim() ?? '';
+          const last     = row[1]?.trim() ?? '';
+          const nickname = row[2]?.trim() ?? '';
+          if (!first && !last) return acc;
+          acc.push({ first, last, nickname });
+          return acc;
+        }, []);
+
+        const response = new Response(JSON.stringify(members), {
+          headers: {
+            ...cors,
+            'Content-Type': 'application/json',
+            'Cache-Control': 's-maxage=300',
+          },
+        });
+        await cache.put(cacheKey, response.clone());
+        return response;
+
+      } catch (e) {
+        return new Response(JSON.stringify({ error: 'Failed to load roster' }),
+          { status: 500, headers: { ...cors, 'Content-Type': 'application/json' } });
+      }
+    }
+
     // ── GET /api/image?pageId=XXX&field=front ────────
     if (url.pathname === '/api/image') {
       const pageId = url.searchParams.get('pageId');
@@ -216,6 +261,7 @@ export default {
       const cache = caches.default;
       await cache.delete(new Request('https://cache/apparel', request));
       await cache.delete(new Request('https://cache/archive', request));
+      await cache.delete(new Request('https://cache/members', request));
       return new Response('Cache cleared', { headers: cors });
     }
 
